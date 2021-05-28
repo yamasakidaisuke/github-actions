@@ -1,19 +1,19 @@
+name: ftp upload
 on:
-  push:                 
-    branches:           
-      - main
-name: Build and Deploy  
+  push:
+    branches:
+      - master（※０１）
 jobs:
   FTP-Deploy-Action:
-    name: FTP-Deploy-Action     # JOBの名前
-    runs-on: ubuntu-latest      # 仮想環境の種類を指定
+    name: FTP-Deploy-Action
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master                   
-      - name: FTP-Deploy-Action
-        uses: SamKirkland/FTP-Deploy-Action@2.0.0   
-        env:                                        
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}:${{ secrets.FTP_PORT }} 
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }} 
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }} 
-          LOCAL_DIR: dist                           
+      - uses: actions/checkout@master
+      - uses: SamKirkland/FTP-Deploy-Action@2.0.0
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }} :${{ secrets.FTP_PORT }} 
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          LOCAL_DIR: .
           REMOTE_DIR: /home/home-sanwa/www
+          ARGS: --delete
